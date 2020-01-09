@@ -3,6 +3,19 @@ function commonEnd(a, b) {
     return false;
   }
 
+
+a.length>=1 && b.length>=1
+
+ let firstElement1= a[0]
+ let lastElement1= a[]
+
+
+ let firstElement2= b[0]
+ let lastElement2= b[]
+
+ if (firstElement1===firstElement2||lastElement1===lastElement2){
+   return true;
+ }
   // write your code here
 }
 
