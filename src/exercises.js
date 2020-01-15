@@ -17,47 +17,29 @@ function commonEnd(a, b) {
 }
 
  function endsMeet(values, n) {
-   // if (!values || values.length === 0) {
-   //   return false;
-   // }
+   if (values === undefined && values.length < 1 && n > 0 || values >= n.length){
+     return false;
+   }
 //slice-- subset of the array
 
-// let first =  ;
-// let last =   ;
-//
-//   if (values !== undefined && values.length < 1 && n > 0 || values >= n.length){
-//     console.log( )
-//
-//   } else {
-//     console.log(values[""])
-//   }
  }
 
 function difference(numbers) {
-  if (!numbers || numbers.length === 0){
-    return false;
-  }
-
-  var largest = numbers[0];
-  var smallest = numbers[0];
-
-  for (var i = 1; i < numbers.length; i++) {
-
-      if (numbers[i] > largest) {
-          largest = numbers[i];
-      }
-      else if(numbers[i] < smallest) {
-          smallest = numbers[i];
-      }
-}
-  if (numbers === undefined && numbers >= 1 && !Number.isNaN(numbers)){
+  if (numbers === undefined || numbers >= 1 || !Number.isNaN(numbers)){
         return undefined;
-      } else {
-        return largest-smallest;
-      }
-
   }
+      var largest = numbers[0];
+      var smallest = numbers[0];
 
+      for (var i = 1; i < numbers.length; i++) {
+          if (numbers[i] > largest) {
+          largest = numbers[i];
+          } else if(numbers[i] < smallest) {
+          smallest = numbers[i];
+       }
+   }
+        return (largest-smallest);
+};
 function max(number) {
   // write your code here
 }
@@ -79,8 +61,9 @@ function consecutive(numbers) {
 }
 
 function balance(numbers) {
-  // write your code here
-  console.log("test");
+
+
+    console.log("test");
 }
 
 function clumps(values) {
