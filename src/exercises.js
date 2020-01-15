@@ -17,11 +17,11 @@ function commonEnd(a, b) {
 }
 
  function endsMeet(values, n) {
-   if (values === undefined && values.length < 1 && n > 0 || values >= n.length){
-     return false;
+   if (!values || values.length < 1 || n < 0 || n > values.length) {
+     return [];
    }
-//slice-- subset of the array
 
+   return values.slice(0, n).concat(values.slice(values.length - n));
  }
 
 function difference(numbers) {
