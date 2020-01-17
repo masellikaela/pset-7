@@ -25,19 +25,27 @@ function commonEnd(a, b) {
  }
 
 function difference(numbers) {
-  if (numbers === undefined || numbers >= 1 || !Number.isNaN(numbers)){
+  if (!numbers || Number.isNaN(numbers) || numbers < 1){
         return undefined;
   }
-      var largest = numbers[0];
-      var smallest = numbers[0];
+   //    var largest = numbers[0];
+   //    var smallest = numbers[0];
+   //
+   //    for (var i = 1; i < numbers.length; i++) {
+   //        if (numbers[i] > largest) {
+   //        largest = numbers[i];
+   //        } else if(numbers[i] < smallest) {
+   //        smallest = numbers[i];
+   //      }
+   // }
 
-      for (var i = 1; i < numbers.length; i++) {
-          if (numbers[i] > largest) {
-          largest = numbers[i];
-          } else if(numbers[i] < smallest) {
-          smallest = numbers[i];
-       }
-   }
+   var sorted = numbers.slice().sort(function(a, b) {
+     return a - b;
+   });
+
+   var smallest = sorted[0]
+  var largest  = sorted[sorted.length - 1];
+
         return (largest-smallest);
 };
 function max(number) {
