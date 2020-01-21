@@ -61,180 +61,108 @@ function max(number) {
 }
 
 function middle(values) {
-  let array = [];
 
-  if (values == undefined) {
-
-    return [];
-
-  } else if (values.length < 3) {
-
-    return [];
-
-  } else if (values.length % 2 == 0) {
+  if (values == undefined||values.length < 3||values.length % 2 == 0) {
     return [];
   } else {
-    let veryMiddleElement = values[values.length - (Math.ceil(values.length / 2))]
-    let leftMiddleElement = values[(values.length - 1) - (Math.ceil(values.length / 2))]
+    let middle1 = values [Math.floor((values.length - 1) / 2) - 1];
+    let middle2 = values[(values.length - 1) / 2];
 
-    array.push(leftMiddleElement, veryMiddleElement)
-
-    return array;
+    return [middle1, middle2];
   }
 }
 
 function increasing(numbers) {
-  if (numbers == undefined || numbers == []) {
-    return undefined;
-  } else if (numbers.length < 3 || numbers.some(isNaN)) {
-    return undefined;
-  } else {
 
-    for (let i = 1; i < numbers.length; i++) {
-      if ((numbers[i - 1] + 1) === numbers[i]) {
-        i++
-        if ((numbers[i - 1] + 1) === numbers[i]) {
-          return true;
-          break;
-        } else {
-          continue;
-        }
-      } else {
-        continue;
-      }
-    }
-    return false;
-  }
+  if (!numbers || numbers.some(isNaN) || Number.isInteger(numbers) || numbers.length < 3) {
+     return undefined;
+   }
+   else {
+     for (let i = 1; i < numbers.length; i++) {
+       if ((numbers[i - 1] + 1) === numbers[i] && numbers[i + 1] - 1 === numbers[i]) {
+             return true;
+             break;
+       }
+     }
+   }
+   return false;
 }
 
 function everywhere(values, x) {
-  if (values == undefined || x === undefined) {
-    return false;
-  } else if (values.length < 1) {
-    return false;
-  } else if (!values.includes(x)) {
-    return false;
-  } else {
 
-      for (let y = values.indexOf(x); y < values.length; y++) {
-        if (values[y] === values[y + 1] && values[y + 1] !== undefined) {
-          return true;
-          break;
-        } else if (x === 0) {
-          return false;
-          break;
-        } else if (values[y] === values[y + 2] && values[y + 2] !== undefined && values[y + 1] !== values[y]) {
-          return true;
-          break;
-        } else if (values[y] === values[y + 3] && values[y + 3] !== undefined && (values[y + 1] && values[y + 2]) !== values[y + 3]) {
-          return true;
-          break;
-        } else {
-          return false;
-          break;
-        }
-      }
-  }
+  let result;
+  	if (!values || values.length < 1 || !x) {
+  		return false;
+  	}
+
+  	for (let i = 0; i < values.length; i++) {
+  		if (values[i] !== x) {
+  			if (values[i - 1] === x || values[i + 1] === x) {
+  				result = false;
+  			} else {
+  				return false;
+  			}
+  		}
+  	}
+  	return true;
 }
 
-
 function consecutive(numbers) {
-  if (numbers == undefined) {
-    return false;
-  } else if (numbers.length < 3) {
-    return false;
-  } else if (numbers.some(isNaN)) {
+
+  if (!numbers || numbers.length < 3 || numbers.some(isNaN) || Number.isInteger(numbers)) {
     return false;
   } else {
-      for (let i = 0; i < numbers.length; i++) {
-        if (numbers[i] % 2 === 0 && numbers[i + 1] % 2 === 0 && numbers[i + 2] % 2 === 0 && numbers[i + 1] !== undefined && numbers[i + 2] !== undefined) {
-          return true;
-          break;
-        }
-
-        if (numbers[i] % 2 !== 0 && numbers[i + 1] % 2 !== 0 && numbers[i + 2] % 2 !== 0 && numbers[i + 1] !== undefined && numbers[i + 2] !== undefined) {
-          return true;
-          break;
-        } else {
-          continue;
-        }
+    for (let i = 1; i < numbers.length; i++) {
+      if (numbers[i - 1] % 2 === 0 && numbers[i] % 2 === 0 && numbers[i + 1] % 2 === 0) {
+        return true;
+      } else if (numbers[i - 1] % 2 === 1 && numbers[i] % 2 === 1 && numbers[i + 1] % 2 === 1) {
+        return true;
       }
-      return false;
+    }
+    return false;
   }
 }
 
 function balance(numbers) {
-  let size = 0
-  let sum1 = 0
-  let sum2 = 0
-  let count = 0
-  if (!numbers || numbers.length < 2) {
-    return false;
-  }
-  for (i = 0; i < numbers.length; i++) {
-    if (!(Number.isInteger(numbers[i]))) {
-      return false;
-    }
-  }
-  for (z = 0; z < numbers.length; z++) {
-    if (numbers[z] == undefined) {
-      return true;
-    }
-  }
-  for (x = numbers.length; x > -1; x--) {
-    sum1 = 0
-    sum2 = 0
-    for(y = numbers.length - x; y > -1; y--) {
-      sum1 = sum1 + numbers[y]
-    }
-    for(a = numbers.length - 1; a > numbers.length - x; a--) {
-      sum2 = sum2 + numbers[a]
-    }
-    if (sum2 == sum1) {
-      count = 1
-      return true;
-    }
-  }
-  if (count == 0) {
-    return false;
-  }
+
+  	let left = 0;
+  	let result;
+  	let right = 0;
+
+  	if (!numbers || numbers.some(isNaN) || Number.isInteger(numbers) || numbers.length < 2) {
+  		return false;
+  	}
+  	for (let i = 0; i < numbers.length; i++) {
+  		left = left + numbers[i];
+  	}
+  	let half = left / 2;
+  	if (left % 2 === 1) {
+  		return false;
+  	}
+  	for (let j = 0; j < numbers.length - 1; j++) {
+  		right = right + numbers[j];
+  		if (right === half) {
+  			return true;
+  		}
+  	}
+  	return false;
+  console.log("test");
 }
 
 function clumps(values) {
+
+  let count = 0;
   if (!values) {
     return -1;
-  }
-  if (values.length < 2) {
-    return 0;
-  }
-  let last = values[0];
-  let current;
-  let clump = 0
-  let count = 0
-  let count2 = 0
-  for (x = 1; x < values.length; x++) {
-    current = values[x]
-    if (last === current) {
-      clump = clump + 1
-      for (y = x; y < values.length; y++) {
-        last = current
-        current = values[y]
-        if (!(last === current)) {
-          count = 1
-          x = y
-          break;
-        }
-        else {
-          count = -1
-        }
+  } else {
+     for (let i = 0; i < values.length - 1; i++) {
+       if (values[i - 1] === values[i]) {
+      } else if (values[i] === values[i + 1]) {
+         count++;
       }
-    }
-    if (count == -1) {
-      break;
-    }
-    last = current
+     }
+    return count;
   }
-  return clump;
 }
 
 /*
