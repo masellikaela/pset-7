@@ -51,30 +51,48 @@ function max(number) {
 
 function middle(values) {
 
-  if (values == undefined||values.length < 3||values.length % 2 == 0) {
+  if (!values || values.length % 2 === 0 || values.length < 3) {
     return [];
   } else {
-    let middle1 = values [Math.floor((values.length - 1) / 2) - 1];
-    let middle2 = values[(values.length - 1) / 2];
+    let newA = [];
 
-    return [middle1, middle2];
+    let middle = Math.floor(values.length / 2);
+    newA.push(values[middle - 1], values[middle], values[middle + 1]);
+
+    return newA;
   }
 }
 
+
 function increasing(numbers) {
 
-  if (!numbers || numbers.some(isNaN) || Number.isInteger(numbers) || numbers.length < 3) {
-     return undefined;
-   }
-   else {
-     for (let i = 1; i < numbers.length; i++) {
-       if ((numbers[i - 1] + 1) === numbers[i] && numbers[i + 1] - 1 === numbers[i]) {
-             return true;
-             break;
-       }
-     }
-   }
-   return false;
+  if (!numbers || numbers.length < 3) {
+    return false;
+  }
+  let flag = false;
+  for (let i = 0; i < numbers.length - 2; i++) {
+    let index = Number.isInteger(numbers[i]);
+    if (index === false) {
+      return false;
+    }
+    let first = numbers[i];
+    let second = numbers[i + 1];
+    let third = numbers[i + 2];
+    let indexsecond = Number.isInteger(second);
+    let indexthird = Number.isInteger(third);
+
+    if (indexsecond === false || indexthird === false) {
+      return false;
+    }
+    if (first < second && second < third) {
+      flag = true;
+    }
+  }
+  if (flag) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function everywhere(values, x) {
