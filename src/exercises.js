@@ -25,38 +25,27 @@ function commonEnd(a, b) {
  }
 
 function difference(numbers) {
-  if (numbers == undefined || numbers < 1 || numbers.some(isNaN)) {
+
+  if (numbers == undefined||numbers < 1||numbers.some(isNaN)) {
     return undefined;
   } else {
-
-    let bigInteger = Math.max.apply(null, numbers)
-    let smallInteger = Math.min.apply(null, numbers)
-
-    let difference = bigInteger - smallInteger
-
-    return difference
+    let largest = Math.max.apply(Math, numbers);
+    let smallest = Math.min.apply(Math, numbers);
+    return largest - smallest;
   }
 }
+
 function max(number) {
 
-  if (number == undefined || number <= 2 || number.some(isNaN)) {
-
+  if (number == undefined||number < 3||number.some(isNaN)||number.length % 2 == 0) {
     return undefined;
-
-  } else if (number.length % 2 == 0) {
-
-    return undefined;
-
   } else {
-     let lastElement = number[number.length - 1]
-     let middleElement = number[number.length - (Math.ceil(number.length / 2))]
-     let firstElement = number[0]
+    let first = number[0];
+    let last = number[number.length -1];
+    let middle = number[Math.floor((number.length - 1) / 2)];
+    let elements = [first, middle, last];
 
-     let array = [firstElement, middleElement, lastElement]
-
-     let largestValue = Math.max.apply(null, array)
-
-     return largestValue;
+    return Math.max.apply(Math, elements);
   }
 }
 
